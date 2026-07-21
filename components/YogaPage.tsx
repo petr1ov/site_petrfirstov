@@ -2,6 +2,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+
+const qrCodes = [
+  { title: 'Сайт', url: 'https://dhamma.org.ru/', image: '/qr/site.svg' },
+  { title: 'Вк', url: 'https://vk.ru/vipassana', image: '/qr/vk.svg' },
+  { title: 'Курс 1', url: 'https://mycourses.dhamma.org.ru/ru/enrolment/initial_enrolment_form/35HIet6W02owK9F', image: '/qr/course-1.svg' },
+  { title: 'Курс 2', url: 'https://mycourses.dhamma.org.ru/ru/enrolment/initial_enrolment_form/BNj27whriN2K1SK', image: '/qr/course-2.svg' },
+  { title: 'Подробней', url: 'https://ru.dhamma.org/ru/o-meditacii-vipassana/chto-takoe-vipassana/', image: '/qr/details.svg' },
+  { title: 'Кодекс', url: 'https://ru.dhamma.org/ru/ssylki/kodeks-discipliny/', image: '/qr/code.svg' },
+];
+
 const YogaPage: React.FC = () => {
   const scrollToFormats = () => {
     const element = document.getElementById('formats');
@@ -292,7 +302,52 @@ const YogaPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. FINAL CTA */}
+
+      {/* 5. QR CODES */}
+      <section className="py-32 px-6 border-t border-white/5 bg-zinc-950/40">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-7xl mx-auto space-y-12"
+        >
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="text-blue-500 text-[10px] font-black uppercase tracking-[0.3em]">QR Links</div>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter">QR-коды для практики</h2>
+            <p className="text-zinc-500 text-lg font-light">
+              Быстрые ссылки на сайт, сообщество, регистрацию на курсы, описание Випассаны и кодекс дисциплины.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {qrCodes.map((qr) => (
+              <motion.a
+                key={qr.title}
+                href={qr.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -6 }}
+                className="group p-6 rounded-[2rem] bg-white/5 border border-white/10 hover:border-white/25 transition-all"
+              >
+                <div className="bg-white rounded-3xl p-4 mb-5 aspect-square flex items-center justify-center">
+                  <img src={qr.image} alt={`QR-код: ${qr.title}`} className="w-full h-full object-contain" />
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-xl font-bold group-hover:text-blue-300 transition-colors">{qr.title}</h3>
+                    <p className="text-xs text-zinc-500 break-all mt-1">{qr.url}</p>
+                  </div>
+                  <svg className="w-5 h-5 shrink-0 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 6. FINAL CTA */}
       <section className="py-32 text-center px-6">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
